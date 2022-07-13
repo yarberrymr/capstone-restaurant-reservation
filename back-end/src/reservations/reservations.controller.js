@@ -1,10 +1,10 @@
 const service = require("./reservations.service");
-const asyncErr = require("../errors/asyncErrorBoundary");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const dateFormat = /\d\d\d\d-\d\d-\d\d/;
 const timeFormat = /\d\d:\d\d/;
 
 /** Validates Reservation before POST */
-const valRes = (req, res, next) => {
+const validateReservation = (req, res, next) => {
   const data = req.body.data;
 
   if (!data) return next({ status: 400, message: `Invalid body.` });
@@ -41,12 +41,12 @@ async function list(req, res, next) {
   return res.json({ data });
 }
 
-async function post(req, res, next) {
+async function create(req, res, next) {
   const data = await service.create(req.body.data);
   return res.status(201).json({ data });
 }
 
 module.exports = {
-  list: asyncErr(list),
-  post: [valRes, asyncErr(post)],
+  list: asyncErrorBoundary(list),
+  create: [validateReservation, asyncErrorBoundary(create)],
 };
