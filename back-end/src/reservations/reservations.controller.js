@@ -3,6 +3,23 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const dateFormat = /\d\d\d\d-\d\d-\d\d/;
 const timeFormat = /\d\d:\d\d/;
 
+function validateReservationDate(req, res, next){
+  const {data = {} } = req.body;
+  let temp_reservation_time = data["reservation_time"] && data["reservation_time"].replace(":","");
+  if(new Date(data["reservation_date"]).getDay()+1 === 2){
+    next({
+      status: 400,
+      message: `We are closed on Tuesdays, please pick a day when we are open!`
+    })
+  } if(Date.parse(data["reservation_date"]) < Date.now()){
+    next({
+      status:400,
+      message: `Reservation must be reserved for a date in the future.`
+    })
+  }
+  next();
+}
+
 /** Validates Reservation before POST */
 const validateReservation = (req, res, next) => {
   const data = req.body.data;
@@ -48,5 +65,5 @@ async function create(req, res, next) {
 
 module.exports = {
   list: asyncErrorBoundary(list),
-  create: [validateReservation, asyncErrorBoundary(create)],
+  create: [validateReservationDate, validateReservation, asyncErrorBoundary(create)],
 };
