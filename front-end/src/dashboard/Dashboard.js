@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { listReservations } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
+import { useHistory } from "react-router-dom";
+import { listReservations } from "../../utils/api";
+import { next, previous } from "../../utils/date-time";
+import useQuery from "../../utils/useQuery";
+import ErrorAlert from "./../../layout/ErrorAlert";
 
 /**
  * Defines the dashboard page.
@@ -11,10 +14,31 @@ import ErrorAlert from "../layout/ErrorAlert";
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const query = useQuery();
+  const dateQuery = query.get("date")
+  const [pageDate, setPageDate] = useState(dateQuery ? dateQuery : date);
 
-  useEffect(loadDashboard, [date]);
+  const history = useHistory();
+
+  useEffect(loadDashboard, [date, pageDate]);
+
+  const nextDateHandler = () => {
+    setPageDate(next(pageDate));
+    history.push(`/dashboard?date=${next(pageDate)}`);
+  };
+
+  const previousDateHandler = () => {
+    setPageDate(previous(pageDate));
+    history.push(`/dashboard?date=${previous(pageDate)}`);
+  };
+
+  const todayHandler = () => {
+    setPageDate(date);
+    history.push(`/dashboard?date=${date}`);
+  };
 
   function loadDashboard() {
+    const date = pageDate
     const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
@@ -27,7 +51,18 @@ function Dashboard({ date }) {
     <main>
       <h1>Dashboard</h1>
       <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+        <h4 className="mb-0">Reservations for date {pageDate}</h4>
+      </div>
+      <div>
+        <button className="btn btn-secondary" onClick={previousDateHandler}>
+          Previous
+        </button>
+        <button className="btn btn-secondary" onClick={todayHandler}>
+          Today
+        </button>
+        <button className="btn btn-secondary" onClick={nextDateHandler}>
+          Next
+        </button>
       </div>
       <ErrorAlert error={reservationsError} />
       {JSON.stringify(reservations)}
@@ -35,4 +70,4 @@ function Dashboard({ date }) {
   );
 }
 
-export default Dashboard;
+export default Dashboard; 
