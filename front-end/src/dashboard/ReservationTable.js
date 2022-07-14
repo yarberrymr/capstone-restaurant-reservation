@@ -10,19 +10,6 @@ const ReservationCard = ({ reservation }) => {
     } = reservation;
     console.log(reservation)
     return (
-      <div className="table-responsive" >
-       <table className="table no-wrap" >
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>NAME</th>
-                <th>PHONE</th>
-                <th>DATE</th>
-                <th>TIME</th>
-                <th>PEOPLE</th>
-            </tr>
-        </thead>
-        <tbody>
             <tr>
                 <td>{reservation_id}</td>
                 <td>{first_name} {last_name}</td>
@@ -31,9 +18,7 @@ const ReservationCard = ({ reservation }) => {
                 <td>{reservation_time}</td>
                 <td>{people}</td>
             </tr>
-        </tbody>
-       </table>
-      </div>
+        
     );
   };
   

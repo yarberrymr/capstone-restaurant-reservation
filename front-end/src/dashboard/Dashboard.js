@@ -68,13 +68,30 @@ function Dashboard({ date }) {
       </div>
       <ErrorAlert error={reservationsError} />
 
-      {reservations?.length ? (
+      <div className="table-responsive" >
+       <table className="table no-wrap" >
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>NAME</th>
+                <th>PHONE</th>
+                <th>DATE</th>
+                <th>TIME</th>
+                <th>PEOPLE</th>
+            </tr>
+        </thead>
+        <tbody>
+           {reservations?.length ? (
         reservations.map((reservation) => (
           <ReservationCard key={reservation.mobile_number} reservation={reservation} />
         ))
       ) : (
         <NoReservation />
       )}
+        </tbody>
+       </table>
+      </div>
+      
 
     </main>
   );
