@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createReservation } from "./../../utils/api";
-import ReservationForm from "./ReservationForms";
+import { createReservation } from "../utils/api";
+import ReservationForm from "./ReservationForm";
 
 export default function CreateReservation() {
   const history = useHistory();
@@ -21,7 +21,7 @@ export default function CreateReservation() {
     event.preventDefault();
     history.go(-1);
   };
-  
+
   const changeHandler = (event) => {
     event.preventDefault();
     setFormData({ ...formData, [event.target.name]: event.target.value });

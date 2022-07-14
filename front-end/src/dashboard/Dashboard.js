@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { listReservations } from "../../utils/api";
-import { next, previous } from "../../utils/date-time";
-import useQuery from "../../utils/useQuery";
-import ErrorAlert from "./../../layout/ErrorAlert";
+import { listReservations } from "../utils/api";
+import { next, previous } from "../utils/date-time";
+import useQuery from "../utils/useQuery";
+import ErrorAlert from "../layout/ErrorAlert";
+import ReservationCard from "./ReservationTable";
+import NoReservation from "./NoReservation";
 
 /**
  * Defines the dashboard page.
@@ -65,7 +67,15 @@ function Dashboard({ date }) {
         </button>
       </div>
       <ErrorAlert error={reservationsError} />
-      {JSON.stringify(reservations)}
+
+      {reservations?.length ? (
+        reservations.map((reservation) => (
+          <ReservationCard key={reservation.mobile_number} reservation={reservation} />
+        ))
+      ) : (
+        <NoReservation />
+      )}
+
     </main>
   );
 }
