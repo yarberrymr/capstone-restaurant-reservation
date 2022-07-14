@@ -80,3 +80,15 @@ export function next(currentDate) {
   date.setDate(date.getDate() + 1);
   return asDateString(date);
 }
+
+export function isAfterToday(date) {
+  const today = new Date();
+  const checkDate = new Date(date);
+
+  return today < checkDate;
+}
+
+export function getDay(date) {
+  const checkDate = new Date(date);
+  return checkDate.getDay()
+}
