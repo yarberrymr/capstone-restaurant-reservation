@@ -5,8 +5,6 @@ const timeFormat = /\d\d:\d\d/;
 
 function validateReservationDateTime(req, res, next){
   const {data = {} } = req.body;
-  console.log(Date.now(), "Date Now");
-  console.log(Date.parse(data["reservation_date"]), "Today");
   let temp_reservation_time = data["reservation_time"] && data["reservation_time"].replace(":","");
   if(new Date(data["reservation_date"]).getDay()+1 === 2){
     next({
@@ -14,7 +12,6 @@ function validateReservationDateTime(req, res, next){
       message: `We are closed on Tuesdays, please pick a day when we are open!`
     })
   } else if(Date.parse(data["reservation_date"]) < Date.now()){
-    console.log('something fucking up');
     next({
       status:400,
       message: `Reservation must be reserved for a date in the future.`
