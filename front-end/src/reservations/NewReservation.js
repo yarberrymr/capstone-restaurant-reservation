@@ -6,7 +6,7 @@ import ErrorAlert from "../layout/ErrorAlert";
 
 export default function CreateReservation() {
   const history = useHistory();
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
   const initialFormData = {
     first_name: "",
@@ -23,17 +23,17 @@ export default function CreateReservation() {
     <ErrorAlert key={index} error={error} />
   ));
 
-   const cancelHandler = (event) => {
+  const cancelHandler = (event) => {
     event.preventDefault();
-    history.go(-1);
+    history.goBack();
   };
 
   const changeHandler = (event) => {
     event.preventDefault();
-    setErrors({})
+    setErrors({});
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
- 
+
   const submitHandler = async (event) => {
     event.preventDefault();
     const ac = new AbortController();
@@ -62,4 +62,4 @@ export default function CreateReservation() {
       />
     </>
   );
-} 
+}
