@@ -37,7 +37,7 @@ async function tableExists(req, res, next) {
   } else {
     next({
       status: 404,
-      message: "Table could not be found.",
+      message: `Table ${table_id} could not be found.`,
     });
   }
 }
@@ -98,7 +98,7 @@ function checkNotOccupied(req, res, next) {
   if (!res.locals.table.reservation_id) {
     return next({
       status: 400,
-      message: "Table is not currently occupied",
+      message: "Table is not occupied",
     });
   }
   next();
