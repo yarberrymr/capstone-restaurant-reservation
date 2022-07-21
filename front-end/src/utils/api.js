@@ -76,7 +76,7 @@ export async function createReservation(reservation, signal) {
     headers,
     signal,
   };
-  return await fetchJson(url, options, reservation)
+  return await fetchJson(url, options, reservation);
 }
 
 export async function readReservation(reservation_id, signal) {
@@ -117,4 +117,4 @@ export async function seatReservation(reservation_id, table_id, signal) {
     signal,
   };
   return await fetchJson(url, options, {});
-} 
+}

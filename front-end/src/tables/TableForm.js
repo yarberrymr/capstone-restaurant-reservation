@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function TableForm({
-  title,
   submitHandler,
   tableData,
   changeHandler,
@@ -9,36 +8,36 @@ export default function TableForm({
 }) {
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>Create a New Table</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="table_name">
-          Table Name:
+          Table Name
           <input
             type="text"
             id="table_name"
             name="table_name"
-            required
             onChange={changeHandler}
             value={tableData.table_name}
+            required
           />
         </label>
         <label htmlFor="capacity">
-          Capacity:
+          Capacity
           <input
             type="number"
             id="capacity"
             name="capacity"
-            required
             min={1}
             onChange={changeHandler}
             value={tableData.capacity}
+            required
           />
         </label>
         <div>
           <button className="btn btn-primary" type="submit">
             Submit
           </button>
-          <button 
+          <button
             type="button"
             className="btn btn-secondary"
             onClick={cancelHandler}
@@ -49,4 +48,4 @@ export default function TableForm({
       </form>
     </div>
   );
-} 
+}

@@ -5,8 +5,8 @@ import TableForm from "./TableForm";
 import { useHistory } from "react-router-dom";
 
 export default function CreateTable() {
-  const [tableErrors, setTableErrors] = useState({});
   const history = useHistory();
+  const [tableErrors, setTableErrors] = useState({});
 
   const initialFormData = {
     table_name: "",
@@ -37,20 +37,19 @@ export default function CreateTable() {
 
   const changeHandler = (event) => {
     event.preventDefault();
-    setTableErrors({})
+    setTableErrors({});
     setTableData({ ...tableData, [event.target.name]: event.target.value });
   };
 
   const cancelHandler = (event) => {
     event.preventDefault();
-    history.go(-1);
+    history.goBack();
   };
 
   return (
     <>
       <div className="errors">{errorMapping ? errorMapping : null}</div>
       <TableForm
-        title={"Create Table"}
         submitHandler={submitHandler}
         changeHandler={changeHandler}
         cancelHandler={cancelHandler}
@@ -58,4 +57,4 @@ export default function CreateTable() {
       />
     </>
   );
-} 
+}

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { listReservations, listTables} from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import { next, previous } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationTable from "../reservations/ReservationTable";
 import NoReservation from "../reservations/NoReservation";
-import TableList from "../tables/TableList"
+import TableList from "../tables/TableList";
 
 /**
  * Defines the dashboard page.
@@ -15,17 +15,15 @@ import TableList from "../tables/TableList"
  * @returns {JSX.Element}
  */
 function Dashboard({ date }) {
-  const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState({});
   const query = useQuery();
-  const dateQuery = query.get("date")
+  const dateQuery = query.get("date");
+  const history = useHistory();
+  const [reservations, setReservations] = useState([]);
+  const [errors, setErrors] = useState({});
   const [pageDate, setPageDate] = useState(dateQuery ? dateQuery : date);
   const [tables, setTables] = useState([]);
 
-  const history = useHistory();
-
   useEffect(loadDashboard, [date, pageDate]);
-
 
   const nextDateHandler = () => {
     setPageDate(next(pageDate));
@@ -43,24 +41,22 @@ function Dashboard({ date }) {
   };
 
   function loadDashboard() {
-    const date = pageDate
+    const date = pageDate;
     const abortController = new AbortController();
-    setReservationsError({});
+    setErrors({});
     listReservations({ date }, abortController.signal)
       .then(setReservations)
-      .catch(setReservationsError)
-    listTables(abortController.signal)
-      .then(setTables)
-      .catch(setReservationsError);
+      .catch(setErrors);
+    listTables(abortController.signal).then(setTables).catch(setErrors);
     return () => abortController.abort();
   }
 
   return (
     <main>
       <h1>Dashboard</h1>
-      
+
       <div className="col">
-        <h4 className="mb-0">Reservations for date {pageDate}</h4>
+        <h4 className="mb-0">Reservations for {pageDate}</h4>
       </div>
       <div>
         <button className="btn btn-secondary" onClick={previousDateHandler}>
@@ -72,59 +68,61 @@ function Dashboard({ date }) {
         <button className="btn btn-secondary" onClick={nextDateHandler}>
           Next
         </button>
+      </div>
+      {errors.length && <ErrorAlert error={errors} />}
+      <div className="row">
+        <div className="col">
+          <div className="table-responsive">
+            <table className="table no-wrap">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>NAME</th>
+                  <th>PHONE</th>
+                  <th>DATE</th>
+                  <th>TIME</th>
+                  <th>PEOPLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservations?.length ? (
+                  reservations.map((reservation) => (
+                    <ReservationTable
+                      key={reservation.mobile_number}
+                      reservation={reservation}
+                    />
+                  ))
+                ) : (
+                  <NoReservation />
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-       {reservationsError.length && <ErrorAlert error={reservationsError} />}
-<div className="row">
-  <div className="col">
-      <div className="table-responsive" >
-       <table className="table no-wrap" >
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>NAME</th>
-                <th>PHONE</th>
-                <th>DATE</th>
-                <th>TIME</th>
-                <th>PEOPLE</th>
-            </tr>
-        </thead>
-        <tbody>
-           {reservations?.length ? (
-        reservations.map((reservation) => (
-          <ReservationTable key={reservation.mobile_number} reservation={reservation} />
-        ))
-      ) : (
-        <NoReservation />
-      )}
-        </tbody>
-       </table>
+
+        <div className="col">
+          <div className="table-responsive">
+            <table className="table no-wrap">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Capacity</th>
+                  <th>Reservation #</th>
+                  <th>Table Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tables.map((table) => (
+                  <TableList key={table.table_id} table={table} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      </div>
-      
-      <div className="col">
-      <div className="table-responsive" >
-       <table className="table no-wrap" >
-        <thead>
-            <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>Reservation #</th>
-            <th>Table Status</th>
-            </tr>
-        </thead>
-        <tbody>
-        {tables.map((table) => (
-          <TableList key={table.table_id} table={table} />
-        ))}
-        </tbody>
-       </table>
-      </div>
-      </div>
-      </div>
-      
     </main>
   );
 }
 
-export default Dashboard; 
+export default Dashboard;
