@@ -1,4 +1,6 @@
-const ReservationCard = ({ reservation }) => {
+import { Link } from 'react-router-dom';
+
+const ReservationTable= ({ reservation }) => {
     const {
       reservation_id,
       first_name,
@@ -17,9 +19,11 @@ const ReservationCard = ({ reservation }) => {
                 <td>{reservation_date}</td>
                 <td>{reservation_time}</td>
                 <td>{people}</td>
+                <td><Link to={`/reservations/${reservation_id}/seat`} href={`/reservations/${reservation_id}/seat`}
+           className="btn btn-primary">Seat</Link></td>
             </tr>
         
     );
   };
   
-  export default ReservationCard;
+  export default ReservationTable;
