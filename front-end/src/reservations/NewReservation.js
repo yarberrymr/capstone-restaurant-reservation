@@ -52,8 +52,9 @@ export default function CreateReservation() {
 
   return (
     <>
-      <div className="createErrors">{errorMapping ? errorMapping : null}</div>
       <h1 className="my-3">Create Reservation</h1>
+      <div className="createErrors">{errorMapping ? errorMapping : null}</div>
+
       <ReservationForm
         changeHandler={changeHandler}
         cancelHandler={cancelHandler}
