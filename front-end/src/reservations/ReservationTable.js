@@ -1,41 +1,36 @@
-import { Link } from "react-router-dom";
+import NoReservation from "./NoReservation";
+import ReservationsRows from "./ReservationsRows";
 
-const ReservationTable = ({ reservation }) => {
-  console.log(reservation)
-  const {
-    reservation_id,
-    first_name,
-    last_name,
-    mobile_number,
-    reservation_date,
-    reservation_time,
-    people,
-    status,
-  } = reservation;
-  return (
-    <tr>
-      <td>{reservation_id}</td>
-      <td>
-        {first_name} {last_name}
-      </td>
-      <td>{mobile_number}</td>
-      <td>{reservation_date}</td>
-      <td>{reservation_time}</td>
-      <td>{people}</td>
-      <td data-reservation-id-status={reservation_id}>{status}</td>
-      <td>
-        {reservation.status === "booked" ? (
-          <Link
-            to={`/reservations/${reservation.reservation_id}/seat`}
-            href={`/reservations/${reservation_id}/seat`}
-            className="btn btn-primary"
-          >
-            <p>Seat</p>
-          </Link>
-        ) : null}
-      </td>
-    </tr>
-  );
+const ReservationTable = ({ reservations }) => {
+  return(
+  <div className="table-responsive">
+            <table className="table no-wrap">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>NAME</th>
+                  <th>PHONE</th>
+                  <th>DATE</th>
+                  <th>TIME</th>
+                  <th>PEOPLE</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservations?.length ? (
+                  reservations.map((reservation) => (
+                    <ReservationsRows
+                      key={reservation.reservation_id}
+                      reservation={reservation}
+                    />
+                  ))
+                ) : (
+                  <NoReservation />
+                )}
+              </tbody>
+            </table>
+          </div>
+  )
 };
 
 export default ReservationTable;
