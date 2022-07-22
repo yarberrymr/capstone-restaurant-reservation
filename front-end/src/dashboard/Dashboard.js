@@ -82,6 +82,7 @@ function Dashboard({ date }) {
                   <th>DATE</th>
                   <th>TIME</th>
                   <th>PEOPLE</th>
+                  <th>STATUS</th>
                 </tr>
               </thead>
               <tbody>
