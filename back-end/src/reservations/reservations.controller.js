@@ -62,7 +62,7 @@ const validateReservation = (req, res, next) => {
 async function reservationExists(req, res, next) {
   const { reservation_id } = req.params;
   const reservation = await service.read(reservation_id);
-  
+
   if (reservation) {
     res.locals.reservation = reservation;
     return next();
@@ -74,9 +74,48 @@ async function reservationExists(req, res, next) {
   }
 }
 
+function validateStatuses(req, res, next) {
+  const reservation = res.locals.reservation;
+  const { data = {} } = req.body;
+  const status = data["status"];
+
+  if (reservation.status === "finished") {
+    return next({
+      status: 400,
+      message: "Reservation is already finished.",
+    });
+  }
+
+  if (
+    status === "booked" ||
+    status === "seated" ||
+    status === "finished" ||
+    status === "cancelled"
+  ) {
+    return next();
+  }
+
+  return next({
+    status: 400,
+    message: `Invalid or unknown status: ${status}`,
+  });
+}
+
+function checkBookedStatus(req, res, next) {
+  const { data = {} } = req.body;
+  const status = data["status"];
+
+  if (status === "booked" || status === undefined) {
+    return next();
+  }
+  return next({
+    status: 400,
+    message: `Invalid or unknown status: ${status}`,
+  });
+}
+
 async function list(req, res, next) {
-  if (!req.query.date)
-    return next({ status: 400, message: `Date not found` });
+  if (!req.query.date) return next({ status: 400, message: `Date not found` });
   const data = await service.list(req.query.date);
   return res.json({ data });
 }
@@ -91,12 +130,25 @@ function read(req, res) {
   res.json({ data });
 }
 
+async function statusUpdate(req, res) {
+  const reservation = res.locals.reservation;
+  const { status } = req.body.data;
+  const updatedReservation = {
+    ...reservation,
+    status,
+  };
+  const data = await service.statusUpdate(updatedReservation);
+  res.json({ data });
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
     validateReservationDateTime,
     validateReservation,
+    checkBookedStatus,
     asyncErrorBoundary(create),
   ],
   read: [asyncErrorBoundary(reservationExists), read],
+  statusUpdate: [asyncErrorBoundary(reservationExists), validateStatuses, asyncErrorBoundary(statusUpdate)]
 };
