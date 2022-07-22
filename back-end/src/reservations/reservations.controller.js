@@ -115,9 +115,13 @@ function checkBookedStatus(req, res, next) {
 }
 
 async function list(req, res, next) {
-  if (!req.query.date) return next({ status: 400, message: `Date not found` });
-  const data = await service.list(req.query.date);
-  return res.json({ data });
+  if (req.query.date) {
+    const data = await service.list(req.query.date);
+    res.json({ data });
+  } else {
+  const data = await service.searchByNumber(req.query.mobile_number);
+  res.json({ data });
+  }
 }
 
 async function create(req, res, next) {
