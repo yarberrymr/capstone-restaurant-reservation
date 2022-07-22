@@ -62,6 +62,7 @@ const validateReservation = (req, res, next) => {
 async function reservationExists(req, res, next) {
   const { reservation_id } = req.params;
   const reservation = await service.read(reservation_id);
+  
   if (reservation) {
     res.locals.reservation = reservation;
     return next();

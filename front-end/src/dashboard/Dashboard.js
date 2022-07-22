@@ -88,7 +88,7 @@ function Dashboard({ date }) {
                 {reservations?.length ? (
                   reservations.map((reservation) => (
                     <ReservationTable
-                      key={reservation.mobile_number}
+                      key={reservation.reservation_id}
                       reservation={reservation}
                     />
                   ))
@@ -112,11 +112,9 @@ function Dashboard({ date }) {
                   <th>Table Status</th>
                 </tr>
               </thead>
-              <tbody>
                 {tables.map((table) => (
                   <TableList key={table.table_id} table={table} />
                 ))}
-              </tbody>
             </table>
           </div>
         </div>
