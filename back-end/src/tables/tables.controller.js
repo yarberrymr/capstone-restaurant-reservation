@@ -104,6 +104,17 @@ function checkNotOccupied(req, res, next) {
   next();
 }
 
+function checkStatus(req, res, next) {
+  const reservation = res.locals.reservation;
+  if (reservation.status === "booked") {
+    return next();
+  }
+  return next({
+    status: 400,
+    message: "Reservation is already seated or finished."
+  })
+}
+
 async function create(req, res) {
   const data = await service.create(req.body.data);
   res.status(201).json({ data });
@@ -139,6 +150,7 @@ module.exports = {
     asyncErrorBoundary(reservationExists),
     checkOccupied,
     checkCapacity,
+    checkStatus,
     asyncErrorBoundary(update),
   ],
   finish: [
