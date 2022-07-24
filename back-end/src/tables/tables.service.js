@@ -16,8 +16,8 @@ function read(table_id) {
 }
 
 async function update(updatedTable) {
-  return knex.transaction(async (trx) => {
-    await trx("reservations")
+  return knex.transaction(async (transaction) => {
+    await transaction("reservations")
       .where({ reservation_id: updatedTable.reservation_id })
       .update({ status: "seated" });
 
@@ -30,12 +30,12 @@ async function update(updatedTable) {
 }
 
 async function finish(table_id, reservation_id){
-  return knex.transaction(async (trx) => {
-    await trx("reservations")
+  return knex.transaction(async (transaction) => {
+    await transaction("reservations")
       .where({ reservation_id })
       .update({ status: "finished" });
 
-    return trx("tables")
+    return transaction("tables")
       .select("*")
       .where({ table_id: table_id })
       .update({ reservation_id: null }, "*")

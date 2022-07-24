@@ -5,7 +5,6 @@ import { next, previous } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationTable from "../reservations/ReservationTable";
-import NoReservation from "../reservations/NoReservation";
 import TableList from "../tables/TableList";
 
 /**
@@ -42,13 +41,13 @@ function Dashboard({ date }) {
 
   function loadDashboard() {
     const date = pageDate;
-    const abortController = new AbortController();
+    const ac = new AbortController();
     setErrors({});
-    listReservations({ date }, abortController.signal)
+    listReservations({ date }, ac.signal)
       .then(setReservations)
       .catch(setErrors);
-    listTables(abortController.signal).then(setTables).catch(setErrors);
-    return () => abortController.abort();
+    listTables(ac.signal).then(setTables).catch(setErrors);
+    return () => ac.abort();
   }
 
   return (
@@ -72,33 +71,7 @@ function Dashboard({ date }) {
       {errors.length && <ErrorAlert error={errors} />}
       <div className="row">
         <div className="col">
-          <div className="table-responsive">
-            <table className="table no-wrap">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>NAME</th>
-                  <th>PHONE</th>
-                  <th>DATE</th>
-                  <th>TIME</th>
-                  <th>PEOPLE</th>
-                  <th>STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
-                {reservations?.length ? (
-                  reservations.map((reservation) => (
-                    <ReservationTable
-                      key={reservation.reservation_id}
-                      reservation={reservation}
-                    />
-                  ))
-                ) : (
-                  <NoReservation />
-                )}
-              </tbody>
-            </table>
-          </div>
+          <ReservationTable reservations={reservations} />
         </div>
 
         <div className="col">

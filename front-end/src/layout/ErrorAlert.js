@@ -9,9 +9,7 @@ import React from "react";
  */
 
 function ErrorAlert({ error }) {
-  return (
-      <p className="alert alert-danger m-2">{error}</p>
-    );
+  return <p className="alert alert-danger m-2">{error}</p>;
 }
 
 export default ErrorAlert;

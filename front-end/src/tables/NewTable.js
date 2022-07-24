@@ -48,7 +48,7 @@ export default function CreateTable() {
 
   return (
     <>
-      <div className="errors">{errorMapping ? errorMapping : null}</div>
+      <div>{errorMapping ? errorMapping : null}</div>
       <TableForm
         submitHandler={submitHandler}
         changeHandler={changeHandler}
