@@ -41,13 +41,13 @@ function Dashboard({ date }) {
 
   function loadDashboard() {
     const date = pageDate;
-    const abortController = new AbortController();
+    const ac = new AbortController();
     setErrors({});
-    listReservations({ date }, abortController.signal)
+    listReservations({ date }, ac.signal)
       .then(setReservations)
       .catch(setErrors);
-    listTables(abortController.signal).then(setTables).catch(setErrors);
-    return () => abortController.abort();
+    listTables(ac.signal).then(setTables).catch(setErrors);
+    return () => ac.abort();
   }
 
   return (

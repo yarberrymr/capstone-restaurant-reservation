@@ -126,4 +126,4 @@ export async function finishSeatedReservation(table_id) {
     headers,
   };
   return await fetchJson(url, options, {});
-} 
+}
