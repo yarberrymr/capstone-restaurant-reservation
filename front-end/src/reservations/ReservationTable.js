@@ -1,7 +1,9 @@
+import React from "react";
 import NoReservation from "./NoReservation";
 import ReservationsRows from "./ReservationsRows";
 
 const ReservationTable = ({ reservations }) => {
+
   return(
   <div className="table-responsive">
             <table className="table no-wrap">

@@ -38,7 +38,7 @@ export default function TableList({ table }) {
       <td data-table-id-status={table_id}><p >{reservation_id? 'occupied': 'free'}</p>
       {reservation_id?
         <button data-table-id-finish={table_id} className='btn btn-primary' onClick={finishHandler}>Finish</button>
-         : ''}
+         : null}
       </td>
     </tr>
     </tbody>
