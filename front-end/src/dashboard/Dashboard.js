@@ -29,14 +29,14 @@ function Dashboard({ date }) {
     history.push(`/dashboard?date=${next(pageDate)}`);
   };
 
-  const previousDateHandler = () => {
-    setPageDate(previous(pageDate));
-    history.push(`/dashboard?date=${previous(pageDate)}`);
-  };
-
   const todayHandler = () => {
     setPageDate(date);
     history.push(`/dashboard?date=${date}`);
+  };
+
+  const previousDateHandler = () => {
+    setPageDate(previous(pageDate));
+    history.push(`/dashboard?date=${previous(pageDate)}`);
   };
 
   function loadDashboard() {
@@ -86,9 +86,9 @@ function Dashboard({ date }) {
                   <th>Table Status</th>
                 </tr>
               </thead>
-                {tables.map((table) => (
-                  <TableList key={table.table_id} table={table} />
-                ))}
+              {tables.map((table) => (
+                <TableList key={table.table_id} table={table} />
+              ))}
             </table>
           </div>
         </div>

@@ -49,11 +49,11 @@ export default function SeatReservation() {
     return () => ac.abort();
   };
 
-  const tableOptions = openTables.map((table) => (
-    <option key={table.table_id} value={table.table_id}>
-      {table.table_name} - {table.capacity}
-    </option>
-  ));
+  // const tableOptions = openTables.map((table) => (
+  //   <option key={table.table_id} value={table.table_id}>
+  //     {table.table_name} - {table.capacity}
+  //   </option>
+  // ));
 
   const { first_name, last_name, reservation_date, reservation_time, people } =
     reservation;
@@ -81,7 +81,11 @@ export default function SeatReservation() {
             value={tableId}
           >
             <option value="">Select a table</option>
-            {tableOptions}
+            {openTables.map((table) => (
+    <option key={table.table_id} value={table.table_id}>
+      {table.table_name} - {table.capacity}
+    </option>
+  ))}
           </select>
         </div>
         <div className="seat-options row">

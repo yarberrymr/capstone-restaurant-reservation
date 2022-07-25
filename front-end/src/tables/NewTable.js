@@ -19,6 +19,17 @@ export default function CreateTable() {
     <ErrorAlert key={index} error={error} />
   ));
 
+  const changeHandler = (event) => {
+    event.preventDefault();
+    setTableErrors({});
+    setTableData({ ...tableData, [event.target.name]: event.target.value });
+  };
+
+  const cancelHandler = (event) => {
+    event.preventDefault();
+    history.goBack();
+  };
+
   const submitHandler = async (event) => {
     event.preventDefault();
     const ac = new AbortController();
@@ -33,17 +44,6 @@ export default function CreateTable() {
       }
     }
     return () => ac.abort();
-  };
-
-  const changeHandler = (event) => {
-    event.preventDefault();
-    setTableErrors({});
-    setTableData({ ...tableData, [event.target.name]: event.target.value });
-  };
-
-  const cancelHandler = (event) => {
-    event.preventDefault();
-    history.goBack();
   };
 
   return (

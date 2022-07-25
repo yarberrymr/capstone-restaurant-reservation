@@ -17,6 +17,7 @@ export default function Search() {
   const findHandler = (event) => {
     event.preventDefault();
     const ac = new AbortController();
+    console.log(errors.length)
     function findReservations() {
       const mobile_number = mobileNumber;
       listReservations({ mobile_number }, ac.signal)
