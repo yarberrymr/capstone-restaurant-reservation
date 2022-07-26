@@ -7,12 +7,15 @@ Prompt for project:
 > At this point, the customers will not access the system online.
 
 ##Live Links
+
 [Deployed Application](https://rest-reserv-frontend-mry.herokuapp.com/dashboard)
 
 [Deployed Backend (API)](https://rest-reserv-backend-mry.herokuapp.com/)
 
 ##Screenshots
+
 ###Dashboard
+
 The dashboard (/dashboard) has these features: 
 - List all reservations for a date (default is the currentt date), sorted by time of reservation
 	- Shows reservation status
@@ -23,17 +26,19 @@ The dashboard (/dashboard) has these features:
 - Buttons for user to switch days, both in the future and in the past
 - Error messages from the API will appear above tables when present
 
-![Dashboard]()
+![Dashboard](deployed-screenshots/Dashboard.png)
 
 ###Search for a Reservation
+
 The search page (/search) has these features:
 - Allows user to search for reservations with mobile number
 - Reservations found with the search parameter will display sorted by time
 - Listed reservations will show status and have buttons to allow for seating, editing, and cancelling reservation
 
-![Search]()
+![Search](deployed-screenshots/Search.png)
 
 ###Create a Reservation
+
 The new reservation page (/reservations/new) has these features:
 - Form for creating a new reservation
 	- All fields are required
@@ -41,17 +46,19 @@ The new reservation page (/reservations/new) has these features:
 - Submitting the form wil return the user to the dashboard for the date of the new reservation
 - Cancelling the form will bring the user back to the previous page
 
-![Create]()
+![Create](deployed-screenshots/Create.png)
 
 ###Edit a Reservation
+
 The edit reservation page (/reservations/{reservation_id}/edit) has these features:
 - Form that allows user to edit a reservation
 - Submitting the form wil return the user to the dashboard for the date of the edited reservation
 - Cancelling the form will bring the user back to the previous page
 
-![Edit]()
+![Edit](deployed-screenshots/Edit.png)
 
 ###Seat a Reservation
+
 The seat reservation page (/reservations/{reservation_id}/seat) has these features:
 - Select options for which table to seat the reservation at
 	- Errors will appear above the options if the seating assignment is not allowed
@@ -59,18 +66,20 @@ The seat reservation page (/reservations/{reservation_id}/seat) has these featur
 	- Tables will show the reservation seated at the chosen table
 - Cancelling the form will bring the user back to the previous page
 
-![Edit]()
+![Seat](deployed-screenshots/Seat.png)
 
 ###Create a Table
+
 The new table page (/tables/new) has these features: 
 - Form that allows the user to create a new table
 	- Errors will appear above the form if present
 - Submitting the form will bring the user to the dashboard and display the newly created table in the list of tables
 - Cancelling the form will bring the user back to the previous page
 
-![Table]()
+![Table](deployed-screenshots/Table.png)
 
 ##Technology
+
 This application was built with the following:
 - React.js
 - Bootstrap
