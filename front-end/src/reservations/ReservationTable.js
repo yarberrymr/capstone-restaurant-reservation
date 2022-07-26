@@ -6,8 +6,8 @@ const ReservationTable = ({ reservations }) => {
 
   return(
   <div className="table-responsive">
-            <table className="table no-wrap">
-              <thead>
+            <table className="table no-wrap table-hover">
+              <thead className="thead-dark">
                 <tr>
                   <th>#</th>
                   <th>NAME</th>
@@ -16,6 +16,9 @@ const ReservationTable = ({ reservations }) => {
                   <th>TIME</th>
                   <th>PEOPLE</th>
                   <th>STATUS</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

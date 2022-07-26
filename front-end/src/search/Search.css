@@ -1,0 +1,15 @@
+@media only screen and (max-width: 991px) {
+  .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  th,
+  td {
+    min-width: 50px;
+  }
+  .btn {
+    margin-bottom: 8px;
+  }
+}
+

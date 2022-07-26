@@ -65,7 +65,7 @@ const ReservationsRows = ({ reservation }) => {
         <td>
           {status === "booked" ? (
             <Link
-              className="btn btn-primary"
+              className="btn btn-danger"
               to={`/reservations/${reservation_id}/edit`}
             >
               Edit
@@ -76,7 +76,7 @@ const ReservationsRows = ({ reservation }) => {
         {status === "seated" ? (
           null
         ) : (<button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           type="button"
           name="cancel"
           data-reservation-id-cancel={reservation_id}

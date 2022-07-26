@@ -1,4 +1,5 @@
 import React from "react";
+import "./Tables.css"
 
 export default function TableForm({
   submitHandler,
@@ -8,33 +9,43 @@ export default function TableForm({
 }) {
   return (
     <div>
-      <h1>Create a New Table</h1>
+      <h1 className="my-3 tables">Create a New Table</h1>
       <form onSubmit={submitHandler}>
-        <label htmlFor="table_name">
-          Table Name
-          <input
+      <div className="form-group">
+      <label className="ml-3" htmlFor="table_name">
+      Table Name
+        </label>
+        <div className="col-sm-6">
+        <input
             type="text"
             id="table_name"
             name="table_name"
+            className="form-control"
             onChange={changeHandler}
             value={tableData.table_name}
             required
           />
+      </div>
+      </div>
+      <div className="form-group">
+      <label className="ml-3" htmlFor="capacity">
+      Capacity
         </label>
-        <label htmlFor="capacity">
-          Capacity
-          <input
+        <div className="col-sm-6">
+        <input
             type="number"
             id="capacity"
             name="capacity"
+            className="form-control"
             min={1}
             onChange={changeHandler}
             value={tableData.capacity}
             required
           />
-        </label>
+      </div>
+      </div>
         <div>
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary ml-3 mr-2" type="submit">
             Submit
           </button>
           <button
