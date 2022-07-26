@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { cancelReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
+//rows of reservations list table 
 const ReservationsRows = ({ reservation }) => {
   const [errors, setErrors] = useState({});
   const history = useHistory();

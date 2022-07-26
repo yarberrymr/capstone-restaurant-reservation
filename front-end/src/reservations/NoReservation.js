@@ -1,3 +1,4 @@
+//return for empty reservations list when no reservations made for that day
 const NoReservation = () => {
   return (
     <tr>

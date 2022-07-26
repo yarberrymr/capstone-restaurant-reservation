@@ -8,11 +8,6 @@ const list = (date) => {
     .whereNot({ status: "finished" })
     .whereNot({ status: "cancelled" })
     .orderBy("reservation_time")
-    // .then((data) =>
-    //   data.sort((previous, current) =>
-    //     previous.reservation_time < current.reservation_time ? -1 : 1
-    //   )
-    // );
 };
 
 const create = (reservation) => {
@@ -26,6 +21,7 @@ const read = (reservation_id) => {
   return knex(table).select("*").where({ reservation_id }).first();
 };
 
+//edit the reservation itself
 function update(updatedReservation) {
   return knex(table)
     .select("*")
@@ -34,6 +30,7 @@ function update(updatedReservation) {
     .then((updatedReservations) => updatedReservations[0]);
 }
 
+//update the status only of the reservation
 const statusUpdate = (reservation) => {
   return knex(table)
     .select("*")

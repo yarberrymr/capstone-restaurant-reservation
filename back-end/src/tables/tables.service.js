@@ -15,6 +15,7 @@ function read(table_id) {
   return knex("tables").select("*").where({ table_id }).first();
 }
 
+//update table and reservation with transaction to keep in sync
 async function update(updatedTable) {
   return knex.transaction(async (transaction) => {
     await transaction("reservations")
@@ -29,6 +30,7 @@ async function update(updatedTable) {
   });
 }
 
+//finish table by updating table and reservation with transaction to keep in sync
 async function finish(table_id, reservation_id){
   return knex.transaction(async (transaction) => {
     await transaction("reservations")

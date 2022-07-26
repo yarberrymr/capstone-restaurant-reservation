@@ -3,6 +3,7 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const dateFormat = /\d\d\d\d-\d\d-\d\d/;
 const timeFormat = /\d\d:\d\d/;
 
+//Validate the reservation for dates and times that the restaurant is open
 function validateReservationDateTime(req, res, next) {
   const { data = {} } = req.body;
   let temp_reservation_time =
@@ -32,6 +33,7 @@ function validateReservationDateTime(req, res, next) {
   next();
 }
 
+//validate the reservation properties for creation
 const validateReservation = (req, res, next) => {
   const data = req.body.data;
 
@@ -59,6 +61,7 @@ const validateReservation = (req, res, next) => {
   return next();
 };
 
+//check if reservation exists in database
 async function reservationExists(req, res, next) {
   const { reservation_id } = req.params;
   const reservation = await service.read(reservation_id);
@@ -74,6 +77,7 @@ async function reservationExists(req, res, next) {
   }
 }
 
+//check status of reservation before updating the reservation to new status
 function validateStatuses(req, res, next) {
   const reservation = res.locals.reservation;
   const { data = {} } = req.body;
@@ -101,6 +105,7 @@ function validateStatuses(req, res, next) {
   });
 }
 
+//check status of reservation prior to creation or editing of reservation
 function checkBookedStatus(req, res, next) {
   const { data = {} } = req.body;
   const status = data["status"];
@@ -134,6 +139,7 @@ function read(req, res) {
   res.json({ data });
 }
 
+//Edit the reservation itself
 async function update(req, res) {
   const updatedReservation = {
     ...req.body.data,
@@ -143,6 +149,7 @@ async function update(req, res) {
   res.json({ data });
 }
 
+//update the status only of the reservation
 async function statusUpdate(req, res) {
   const reservation = res.locals.reservation;
   const { status } = req.body.data;

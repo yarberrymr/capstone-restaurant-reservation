@@ -1,5 +1,5 @@
 import React from "react";
-
+//return for empty reservations list when no reservations made with searched phone number
 export default function EmptySearch() {
   return (
     <div className="table-responsive">

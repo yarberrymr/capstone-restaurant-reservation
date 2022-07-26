@@ -2,6 +2,7 @@ import React from "react";
 import NoReservation from "./NoReservation";
 import ReservationsRows from "./ReservationsRows";
 
+//uses rows for the table from rows component
 const ReservationTable = ({ reservations }) => {
 
   return(

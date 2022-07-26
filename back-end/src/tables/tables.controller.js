@@ -2,6 +2,7 @@ const service = require("./tables.service");
 const reservationService = require("../reservations/reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
+//validate table prior to creation of the table
 const validateTable = (req, res, next) => {
   const data = req.body.data;
 
@@ -28,6 +29,7 @@ const validateTable = (req, res, next) => {
   return next();
 };
 
+//check if the table exists in the database
 async function tableExists(req, res, next) {
   const { table_id } = req.params;
   const foundTable = await service.read(table_id);
@@ -42,6 +44,7 @@ async function tableExists(req, res, next) {
   }
 }
 
+//check capacity of table prior to seating
 function checkCapacity(req, res, next) {
   if (res.locals.table.capacity < res.locals.reservation.people) {
     next({
@@ -52,6 +55,7 @@ function checkCapacity(req, res, next) {
   next();
 }
 
+//check occupancy of table prior to seating
 function checkOccupied(req, res, next) {
   if (res.locals.table.reservation_id) {
     return next({
@@ -62,6 +66,7 @@ function checkOccupied(req, res, next) {
   next();
 }
 
+//check if reservation exists in database priot to seating
 async function reservationExists(req, res, next) {
   const { reservation_id } = req.body.data;
   const foundReservation = await reservationService.read(reservation_id);
@@ -76,6 +81,7 @@ async function reservationExists(req, res, next) {
   }
 }
 
+//validate table prior to seating reservation at table
 function validateUpdatedTable(req, res, next) {
   const data = req.body.data;
 
@@ -94,6 +100,7 @@ function validateUpdatedTable(req, res, next) {
   next();
 }
 
+//check occupancy prior to finishing table
 function checkNotOccupied(req, res, next) {
   if (!res.locals.table.reservation_id) {
     return next({
@@ -104,6 +111,7 @@ function checkNotOccupied(req, res, next) {
   next();
 }
 
+//check reservation status prior to seating
 function checkStatus(req, res, next) {
   const reservation = res.locals.reservation;
   if (reservation.status === "booked") {

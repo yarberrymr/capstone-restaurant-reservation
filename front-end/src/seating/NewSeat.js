@@ -50,11 +50,6 @@ export default function SeatReservation() {
     return () => ac.abort();
   };
 
-  // const tableOptions = openTables.map((table) => (
-  //   <option key={table.table_id} value={table.table_id}>
-  //     {table.table_name} - {table.capacity}
-  //   </option>
-  // ));
 
   const { first_name, last_name, reservation_date, reservation_time, people } =
     reservation;
