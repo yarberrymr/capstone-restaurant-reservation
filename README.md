@@ -6,15 +6,15 @@ Prompt for project:
 > The software is used only by restaurant personnel when a customer calls to request a reservation.
 > At this point, the customers will not access the system online.
 
-##Live Links
+## Live Links
 
 [Deployed Application](https://rest-reserv-frontend-mry.herokuapp.com/dashboard)
 
 [Deployed Backend (API)](https://rest-reserv-backend-mry.herokuapp.com/)
 
-##Screenshots
+## Screenshots
 
-###Dashboard
+### Dashboard
 
 The dashboard (/dashboard) has these features: 
 - List all reservations for a date (default is the currentt date), sorted by time of reservation
@@ -28,7 +28,7 @@ The dashboard (/dashboard) has these features:
 
 ![Dashboard](deployed-screenshots/Dashboard.png)
 
-###Search for a Reservation
+### Search for a Reservation
 
 The search page (/search) has these features:
 - Allows user to search for reservations with mobile number
@@ -37,7 +37,7 @@ The search page (/search) has these features:
 
 ![Search](deployed-screenshots/Search.png)
 
-###Create a Reservation
+### Create a Reservation
 
 The new reservation page (/reservations/new) has these features:
 - Form for creating a new reservation
@@ -48,7 +48,7 @@ The new reservation page (/reservations/new) has these features:
 
 ![Create](deployed-screenshots/Create.png)
 
-###Edit a Reservation
+### Edit a Reservation
 
 The edit reservation page (/reservations/{reservation_id}/edit) has these features:
 - Form that allows user to edit a reservation
@@ -57,7 +57,7 @@ The edit reservation page (/reservations/{reservation_id}/edit) has these featur
 
 ![Edit](deployed-screenshots/Edit.png)
 
-###Seat a Reservation
+### Seat a Reservation
 
 The seat reservation page (/reservations/{reservation_id}/seat) has these features:
 - Select options for which table to seat the reservation at
@@ -68,7 +68,7 @@ The seat reservation page (/reservations/{reservation_id}/seat) has these featur
 
 ![Seat](deployed-screenshots/Seat.png)
 
-###Create a Table
+### Create a Table
 
 The new table page (/tables/new) has these features: 
 - Form that allows the user to create a new table
@@ -78,7 +78,7 @@ The new table page (/tables/new) has these features:
 
 ![Table](deployed-screenshots/Table.png)
 
-##Technology
+## Technology
 
 This application was built with the following:
 - React.js
