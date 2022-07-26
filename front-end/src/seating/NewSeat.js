@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readReservation, listTables, seatReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
+import "./Seat.css"
 
 export default function SeatReservation() {
   const { reservation_id } = useParams();
@@ -61,22 +62,24 @@ export default function SeatReservation() {
   if (Object.keys(reservation).length && openTables.length) {
     return (
       <div>
-        <div className="seat-title row">
+        <div className="row ml-1 my-3 seat">
           <h1>Seat Reservation</h1>
         </div>
         {reservationErrors.length && <ErrorAlert error={reservationErrors} />}
         {seatErrors.length && <ErrorAlert error={seatErrors} />}
-        <div className="seat-information row">
+        <div className="row ml-1 mb-2 ">
           <h3>
             #{reservation_id} - {first_name} {last_name} on{" "}
             {reservation_date.split("T")[0]} at {reservation_time} for {people}
           </h3>
         </div>
-        <div className="seat-form row">
-          <label htmlFor="table_id">Seat at:</label>
+        <div className="form-group">
+          <label className="ml-3 seat" htmlFor="table_id">Seat at:</label>
+          <div className="col-sm-6 seat">
           <select
             name="table_id"
             id="table_id"
+            className="form-control"
             onChange={changeHandler}
             value={tableId}
           >
@@ -87,8 +90,18 @@ export default function SeatReservation() {
     </option>
   ))}
           </select>
+          </div>
         </div>
-        <div className="seat-options row">
+        <div className="row ml-3">
+        <div>
+            <button
+              type="submit"
+              className="btn btn-primary mr-2"
+              onClick={submitHandler}
+            >
+              Submit
+            </button>
+          </div>
           <div>
             <button
               type="button"
@@ -96,15 +109,6 @@ export default function SeatReservation() {
               onClick={cancelHandler}
             >
               Cancel
-            </button>
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={submitHandler}
-            >
-              Submit
             </button>
           </div>
         </div>

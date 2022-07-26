@@ -6,6 +6,7 @@ import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationTable from "../reservations/ReservationTable";
 import TableList from "../tables/TableList";
+import './Dashboard.css';
 
 /**
  * Defines the dashboard page.
@@ -52,32 +53,32 @@ function Dashboard({ date }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
+      <h1 className="my-3 dashboard">Dashboard</h1>
 
-      <div className="col">
-        <h4 className="mb-0">Reservations for {pageDate}</h4>
+      <div className="mb-3 dashboard">
+        <h4>Reservations for {pageDate}</h4>
       </div>
-      <div>
+      <div className="btn-group mb-2 dashboard">
         <button className="btn btn-secondary" onClick={previousDateHandler}>
-          Previous
+        <span className="oi oi-chevron-left"></span> Previous
         </button>
-        <button className="btn btn-secondary" onClick={todayHandler}>
+        <button className="btn btn-info" onClick={todayHandler}>
           Today
         </button>
         <button className="btn btn-secondary" onClick={nextDateHandler}>
-          Next
+          Next <span className="oi oi-chevron-right"></span>
         </button>
       </div>
       {errors.length && <ErrorAlert error={errors} />}
-      <div className="row">
+      <div className="row dashboard">
         <div className="col">
           <ReservationTable reservations={reservations} />
         </div>
 
         <div className="col">
           <div className="table-responsive">
-            <table className="table no-wrap">
-              <thead>
+            <table className="table no-wrap table-hover">
+              <thead className="thead-dark">
                 <tr>
                   <th>#</th>
                   <th>Name</th>

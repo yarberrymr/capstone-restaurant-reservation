@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
+import "./Reservations.css"
 
 export default function CreateReservation() {
   const history = useHistory();
@@ -53,7 +54,7 @@ export default function CreateReservation() {
 
   return (
     <>
-      <h1 className="my-3">Create Reservation</h1>
+      <h1 className="my-3 reservation">Create Reservation</h1>
       <div>{errorMapping ? errorMapping : null}</div>
 
       <ReservationForm

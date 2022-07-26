@@ -2,3 +2,9 @@
   background-color: #393a44;
   min-width: 200px;
 }
+/* @media only screen and (max-width: 988px) {
+  .side-bar{
+      width: 100%;
+      
+  }
+} */

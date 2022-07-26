@@ -2,8 +2,9 @@ import React from "react";
 
 export default function EmptySearch() {
   return (
+    <div className="table-responsive">
     <table className="table no-wrap">
-      <thead>
+      <thead className="thead-dark">
         <tr>
           <th>#</th>
           <th>NAME</th>
@@ -20,5 +21,6 @@ export default function EmptySearch() {
         </tr>
       </tbody>
     </table>
+    </div>
   );
 }

@@ -1,0 +1,11 @@
+@media only screen and (max-width: 575px) {
+    .seat {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    h3 {
+        text-align: center;
+    }
+    
+  }

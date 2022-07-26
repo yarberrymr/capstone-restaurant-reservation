@@ -7,78 +7,110 @@ export default function ReservationForm({
   formData,
 }) {
   return (
+    <div className="reservationForm">
     <form onSubmit={submitHandler}>
-      <label htmlFor="first_name">
+    <div className="form-group">
+      <label className="ml-3" htmlFor="first_name">
         First Name
-        <input
+        </label>
+        <div className="col-sm-6">
+          <input
           type="text"
           id="first_name"
           name="first_name"
+          className="form-control"
           onChange={changeHandler}
           value={formData.first_name}
           required
         />
-      </label>
-      <label htmlFor="first_name">
-        Last Name
+      </div>
+      </div>
+      <div className="form-group">
+      <label className="ml-3" htmlFor="last_name">
+      Last Name
+        </label>
+        <div className="col-sm-6">
         <input
           type="text"
           id="last_name"
           name="last_name"
+          className="form-control"
           onChange={changeHandler}
           value={formData.last_name}
           required
         />
-      </label>
-      <label htmlFor="mobile_number">
-        Mobile Number
+      </div>
+      </div>
+      <div className="form-group">
+      <label className="ml-3" htmlFor="mobile_number">
+      Mobile Number
+        </label>
+        <div className="col-sm-6">
         <input
           type="text"
           id="mobile_number"
           name="mobile_number"
+          className="form-control"
           onChange={changeHandler}
           value={formData.mobile_number}
           required
         />
-      </label>
-      <label htmlFor="reservation_date">
-        Reservation Date
+      </div>
+      </div>
+      <div className="form-group">
+      <label className="ml-3" htmlFor="reservation_date">
+      Reservation Date
+        </label>
+        <div className="col-sm-6">
         <input
           type="date"
           id="reservation_date"
           name="reservation_date"
+          className="form-control"
           onChange={changeHandler}
           value={formData.reservation_date}
           required
         />
-      </label>
-      <label htmlFor="reservation_date">
-        Reservation Time
+      </div>
+      </div>
+      <div className="form-group">
+      <label className="ml-3" htmlFor="reservation_date">
+      Reservation Time
+        </label>
+        <div className="col-sm-6">
         <input
           type="time"
           id="reservation_time"
           name="reservation_time"
+          className="form-control"
           onChange={changeHandler}
           value={formData.reservation_time}
           required
         />
-      </label>
-      <label htmlFor="reservation_date">
-        Number of Guests
+      </div>
+      </div>
+      <div className="form-group">
+      <label className="ml-3" htmlFor="people">
+      Number of Guests
+        </label>
+        <div className="col-sm-6">
         <input
           type="number"
           id="people"
           name="people"
+          className="form-control"
           min={1}
           onChange={changeHandler}
           value={formData.people}
           required
         />
-      </label>
-      <button type="submit">Submit</button>
-      <button type="button" onClick={cancelHandler}>
+      </div>
+      </div>
+      <button className="btn btn-primary ml-3 mr-2" type="submit">Submit</button>
+      <button className="btn btn-secondary" type="button" onClick={cancelHandler}>
         Cancel
       </button>
     </form>
+    </div>
   );
 }

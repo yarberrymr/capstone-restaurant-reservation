@@ -3,6 +3,7 @@ import ReservationTable from "../reservations/ReservationTable";
 import { listReservations } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import EmptySearch from "./EmptySearch";
+import "./Search.css"
 
 export default function Search() {
   const [mobileNumber, setMobileNumber] = useState("");
@@ -30,14 +31,14 @@ export default function Search() {
 
   return (
     <>
-      <div>
+      <div className="my-3 search">
         <h1>Search Reservations</h1>
       </div>
       <div>
       {errors.length && <ErrorAlert error={errors} />}
       </div>
 
-      <div className="row ml-2">
+      <div className="row ml-1 search">
         <label htmlFor="mobile_number">
           Mobile Number:
           <input
@@ -61,7 +62,7 @@ export default function Search() {
         </div>
       </div>
       {reservations ? (
-        <div>
+        <div className="search table">
           {reservations.length ? (
             <ReservationTable reservations={reservations} />
           ) : (
